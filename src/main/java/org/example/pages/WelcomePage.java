@@ -23,7 +23,7 @@ public class WelcomePage extends Page {
     }
 
     @Override
-    public Page nextPage() {
+    public AdminPage nextPage() {
         return new AdminPage(driver, wait);
     }
 }

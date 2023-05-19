@@ -59,30 +59,62 @@ public class AdminPage extends Page {
     }
 
     public void jobOfferExists(String jobTitle, String jobDescription, String jobNote) {
-        List<WebElement> parentElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.oxd-table-row")));
-
+        List<WebElement> parentElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-row")));
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
         System.out.println(parentElements.size());
-        // Initialize a variable to store the selected parent element
+
         WebElement selectedParentElement = null;
 
+
         // Iterate over the parent elements and find the one with matching descendant text
-        for (WebElement parentElement : parentElements) {
-            // Check if any descendant contains the desired text
-            boolean hasMatchingDescendant = jobTitle.equals(wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.oxd-table-cell > div"))).get(1).getText());
-            //     boolean hasMatchingDescendant = jobTitle.equals(parentElement.findElements(By.cssSelector("div.oxd-table-cell > div")).get(1).getText());
+        for (int i = 0; i < parentElements.size(); i++) {
+           // WebElement cell = parentElements.get(i).findElement(By.className("oxd-table-cell"));
+            boolean hasMatchingDescendant = jobTitle.equals(jobTitles.get(i).getText());
 
             if (hasMatchingDescendant) {
-                // If a descendant contains the text, set the selected parent element and break the loop
-                selectedParentElement = parentElement;
+                selectedParentElement = parentElements.get(i);
                 break;
             }
         }
 
-        // Perform actions on the selected parent element
         assert selectedParentElement != null;
         selectedParentElement.findElement(By.cssSelector("div.oxd-table-cell > div.oxd-table-cell-actions > button"))
                 .click();
 
+    }
+
+    public void deleteButton(String jobTitle) {
+        List<WebElement> buttons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.oxd-table-cell > div.oxd-table-cell-actions > button")));
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
+
+        for (int i = 0; i < jobTitles.size(); i++) {
+            if(jobTitle.equals(jobTitles.get(i).getText())) {
+                buttons.get(i).click();
+                break;
+            }
+
+        }
+
+    }
+
+    public void clickYesInPopupDialog() {
+        WebElement usernameField2 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("oxd-sheet > orangehrm-modal-footer > button:nth-child(2)")));
+        usernameField2.click();
+    }
+
+    public void isJobDeleted(String jobTitle) {
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
+
+        boolean isRemoved = true;
+        for (WebElement title : jobTitles) {
+            if (jobTitle.equals(title.getText())) {
+                isRemoved = false;
+                break;
+            }
+
+        }
+
+        assert isRemoved;
     }
 
     @Override

@@ -34,7 +34,7 @@ public class LoginPage extends Page {
     }
 
     @Override
-    public Page nextPage() {
+    public WelcomePage nextPage() {
         return new WelcomePage(driver, wait);
     }
 }

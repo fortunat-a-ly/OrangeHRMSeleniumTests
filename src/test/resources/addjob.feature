@@ -10,9 +10,6 @@ Feature: Add and remove job
       When I fill in Job Title, Description and Note
       And I click Save button
       Then There should be my job added in Job Title Page
-
-    Scenario: Remove the job
-      Given There is a job I have to delete
       When I click on Bin icon next to the job
       And I click Yes in Popup dialog
       Then The job should disappear from the list

@@ -67,28 +67,22 @@ public class AddJobStepDefinitions {
 
         @Then("There should be my job added in Job Title Page")
         public void jobAdded() {
-
-        }
-
-
-        @Given("There is a job I have to delete")
-        public void jobExists() {
-
+                ((AdminPage) page).jobOfferExists(jobTitle, jobDescription, jobNote);
         }
 
         @When("I click on Bin icon next to the job")
         public void clickOnBinButton() {
-
+                ((AdminPage) page).deleteButton(jobTitle);
         }
 
         @And("I click Yes in Popup dialog")
         public void clickYesInPopupDialog() {
-
+                ((AdminPage) page).clickYesInPopupDialog();
         }
 
         @Then("The job should disappear from the list")
         public void isJobDeleted() {
-
+                ((AdminPage) page).isJobDeleted(jobTitle);
         }
 
 

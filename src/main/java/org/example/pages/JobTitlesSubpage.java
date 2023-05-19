@@ -11,6 +11,10 @@ import java.util.List;
 public class JobTitlesSubpage extends Page {
 
     private final By jobTitlesAddButton = By.className("oxd-button");
+    private final By jobRowSelector = By.className("oxd-table-row");
+    private final By jobTitleSelector = By.className("oxd-table-cell");
+    private final By jobBinButtonSelector = By.cssSelector("div.oxd-table-cell div.oxd-table-cell-actions button.oxd-icon-button:nth-child(1)");
+    private final By popupYesButtonSelector = By.cssSelector(".oxd-sheet > .orangehrm-modal-footer > button:nth-child(2)");
 
     @Override
     public AddJobSubpage nextPage() {
@@ -22,14 +26,14 @@ public class JobTitlesSubpage extends Page {
     }
 
     public void clickAddJobButton() {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitlesAddButton));
-        usernameField2.click();
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitlesAddButton));
+        element.click();
     }
-
     public void jobOfferExists(String jobTitle, String jobDescription, String jobNote) {
-        List<WebElement> parentElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-row")));
-        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
-        System.out.println(parentElements.size());
+        List<WebElement> parentElements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(jobRowSelector));
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(jobTitleSelector));
+        // System.out.println(parentElements.size());
+        // System.out.println(jobTitles.size());
 
         WebElement selectedParentElement = null;
 
@@ -43,16 +47,16 @@ public class JobTitlesSubpage extends Page {
         }
 
         assert selectedParentElement != null;
-        selectedParentElement.findElement(By.cssSelector("div.oxd-table-cell > div.oxd-table-cell-actions > button"))
-                .click();
-
     }
 
     public void deleteButton(String jobTitle) {
-        List<WebElement> buttons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.oxd-table-cell > div.oxd-table-cell-actions > button")));
-        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
+        List<WebElement> buttons = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(jobBinButtonSelector));
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(jobTitleSelector));
 
-        for (int i = 0; i < jobTitles.size(); i++) {
+        //System.out.println(buttons.size());
+        //System.out.println(jobTitles.size());
+
+        for (int i = 0; i < buttons.size(); i++) {
             if(jobTitle.equals(jobTitles.get(i).getText())) {
                 buttons.get(i).click();
                 break;
@@ -63,12 +67,12 @@ public class JobTitlesSubpage extends Page {
     }
 
     public void clickYesInPopupDialog() {
-        WebElement usernameField2 = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("oxd-sheet > orangehrm-modal-footer > button:nth-child(2)")));
-        usernameField2.click();
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(popupYesButtonSelector));
+        element.click();
     }
 
     public void isJobDeleted(String jobTitle) {
-        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("oxd-table-cell")));
+        List<WebElement> jobTitles = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(jobTitleSelector));
 
         boolean isRemoved = true;
         for (WebElement title : jobTitles) {

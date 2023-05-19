@@ -26,13 +26,13 @@ public class AdminPage extends Page {
     }
 
     public void openJobSubmenu() {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(adminMenuItem));
-        usernameField2.click();
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(adminMenuItem));
+        element.click();
     }
 
     public void clickJobTitles() {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitlesSubmenuLink));
-        usernameField2.click();
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitlesSubmenuLink));
+        element.click();
     }
 
     @Override

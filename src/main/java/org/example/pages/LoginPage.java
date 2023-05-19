@@ -21,8 +21,8 @@ public class LoginPage extends Page {
 
     // Actions performed on the login page
     public void setUsername(String username) {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
-        usernameField2.sendKeys(username);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
+        element.sendKeys(username);
     }
 
     public void setPassword(String password) {

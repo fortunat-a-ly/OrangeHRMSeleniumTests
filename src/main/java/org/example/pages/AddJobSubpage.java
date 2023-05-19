@@ -23,20 +23,20 @@ public class AddJobSubpage extends Page {
     }
 
     public void fillJobTitleField(String jobTitle) {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitleField));
-        usernameField2.sendKeys(jobTitle);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobTitleField));
+        element.sendKeys(jobTitle);
     }
 
     public void fillJobDescriptionField(String jobDescription) {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobDescriptionField));
-        usernameField2.sendKeys(jobDescription);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobDescriptionField));
+        element.sendKeys(jobDescription);
     }
     public void fillJobNoteField(String jobNote) {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobNoteField));
-        usernameField2.sendKeys(jobNote);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobNoteField));
+        element.sendKeys(jobNote);
     }
     public void clickSaveJobButton() {
-        WebElement usernameField2 = wait.until(ExpectedConditions.visibilityOfElementLocated(jobSaveButton));
-        usernameField2.click();
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(jobSaveButton));
+        element.click();
     }
 }

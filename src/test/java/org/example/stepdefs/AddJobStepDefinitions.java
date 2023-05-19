@@ -14,7 +14,7 @@ public class AddJobStepDefinitions {
         AdminPage adminPage;
         JobTitlesSubpage jobTitlesSubpage;
         AddJobSubpage addJobSubpage;
-        String jobTitle = "B Java developer";
+        String jobTitle = "B Java developer" + Math.random() % 1000;
         String jobDescription ="Write code 40 hours/week";
         String jobNote = "Applicants should be graduates";
 
